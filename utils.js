@@ -6,6 +6,8 @@ var imageFromPath = function (path) {
     return image;
 }
 
+
+
 var rectIntersects = function (a, b) {
     var o = a
     if (b.y > o.y && b.y < o.y + o.image.height) {
@@ -16,16 +18,3 @@ var rectIntersects = function (a, b) {
     return false
 }
 
-var loadLevel = function (n) {
-    n -= 1;
-    var level = levels[n];
-    var blocks = [];
-    for (let index = 0; index < level.length; index++) {
-        var b = new Block();
-        b.x = level[index][0];
-        b.y = level[index][1];
-        blocks.push(b);
-    }
-
-    return blocks;
-}

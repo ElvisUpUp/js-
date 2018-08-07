@@ -1,13 +1,18 @@
-var Ball = function () {
-    var image = imageFromPath('ball.png');
-    var o = {
-        image: image,
-        x: 100,
-        y: 220,
-        speedX: 10,
-        speedY: 10,
-        fired: false,
-    }
+var Ball = function (game) {
+    var o = game.imageByName('ball');
+    // var o = {
+    //     image: image,
+    //     x: 100,
+    //     y: 220,
+    //     speedX: 10,
+    //     speedY: 10,
+    //     fired: false,
+    // }
+    o.x = 100;
+    o.y = 220;
+    o.speedX = 10;
+    o.speedY = 10;
+    o.fired = false;
     o.fire = function () {
         o.fired = true;
     }
@@ -27,8 +32,8 @@ var Ball = function () {
     }
     o.collide = function (image) {
         //判断是否相撞
-        if (o.y + o.image.height > image.y) {
-            if (o.x > image.x && o.x < image.x + image.image.width) {
+        if (o.y + o.h > image.y) {
+            if (o.x > image.x && o.x < image.x + image.w) {
                 // log('碰撞');
                 return true;
             }
