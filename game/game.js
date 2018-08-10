@@ -23,6 +23,11 @@ class paddleGame {
         
     }
     
+    //单例
+    static instance(...args) {
+        this.i = this.i || new this(...args)
+        return this.i
+    }
     drawImage(image) {
         this.context.drawImage(image.image, image.x, image.y);
     }
