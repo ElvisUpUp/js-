@@ -30,6 +30,7 @@ var Ball = function (game) {
             }
         }
     }
+    
     o.collide = function (image) {
         //判断是否相撞
         if (o.y + o.h > image.y) {
