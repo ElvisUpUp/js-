@@ -4,29 +4,21 @@ var enableDebugMode = function (enable) {
     }
 }
 
-var loadLevel = function (game, n) {
-    n -= 1;
-    var level = levels[n];
-    var blocks = [];
-    for (let index = 0; index < level.length; index++) {
-        var b = new Block(game);
-        b.x = level[index][0];
-        b.y = level[index][1];
-        blocks.push(b);
-    }
-    return blocks;
-}
-
 var __main = function () {
     enableDebugMode(true)
     var images = {
-        ball: 'img/ball.png',
-        block: 'img/block.png',
-        paddle: 'img/paddle.png',
+        bullet: 'img/bullet.png',
+        player: 'img/player.png',
+        background: 'img/background.png',
+        enemy1: 'img/enemy1.png',
+        enemy2: 'img/enemy2.png',
+        enemy3: 'img/enemy3.png',
+        particle: 'img/particle.png',
     }
 
     var game = new paddleGame(images, function(game) {
         var scene = new sceneBegin(game)
+        // var scene = new Scene(game)
         game.runWithScene(scene)
     });
 }

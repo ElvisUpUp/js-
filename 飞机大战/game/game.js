@@ -16,15 +16,15 @@ class paddleGame {
         window.addEventListener('keyup', () => {
             this.keydowns[event.key] = false;
         });
-        window.addEventListener('input', (event) => {
-            window.fps = event.target.value;
-        })
+        // window.addEventListener('input', (event) => {
+        //     window.fps = event.target.value;
+        // })
         this.init()
         
     }
     
     drawImage(image) {
-        this.context.drawImage(image.image, image.x, image.y);
+        this.context.drawImage(image.textture, image.x, image.y);
     }
     pause() {
         this.paused = !this.paused;
@@ -63,14 +63,9 @@ class paddleGame {
         }, 1000 / fps);
     }
 
-    imageByName(name) {
+    texttureByName(name) {
         var img = this.images[name];
-        var image = {
-            w: img.width,
-            h: img.height,
-            image: img,
-        }
-        return image
+        return img
     }
     //开始运行
     runWithScene(scene) {
@@ -92,7 +87,6 @@ class paddleGame {
         var loads = [];
         var names = Object.keys(this.images);
         for (var i = 0; i < names.length; i++) {
-            console.log(1);
             let name = names[i];
             var path = this.images[name];
             let img = new Image();
