@@ -1,15 +1,18 @@
-class Pipes{
+class Pipes {
     constructor(game) {
         this.game = game
         this.pipes = []
-        this.pipeSpace = 200
+        this.pipeSpace = 150
         this.pipeHorizonSpace = 200
         this.colOfPipe = 3
+        this.bird = new Bird(this.game)
+        this.init()
+    }
+    init() {
         for (var i = 0; i < this.colOfPipe; i++) {
-            var p1 = new gameImage(this.game, 'pipe')
-            p1.flipY = true
+            var p1 = new gameImage(this.game, 'pipeUp')
             p1.x = 500 + i * this.pipeHorizonSpace
-            var p2 = new gameImage(game, 'pipe')
+            var p2 = new gameImage(this.game, 'pipeDown')
             p2.x = p1.x
             this.resetPipesPosition(p1, p2)
             this.pipes.push(p1)
@@ -17,31 +20,34 @@ class Pipes{
         }
     }
     resetPipesPosition(p1, p2) {
-        p1.y = randomBetween(-200, 0)
-        p2.y = p1.y + p1.h + this.pipeSpace
+        p1.y = randomBetween(355, 450)
+        p2.y = p1.y - this.pipeSpace - p2.h
     }
     update() {
         for (var p of this.pipes) {
             p.x -= 3
-            if (p.x < 0) {
-                p.x += this.pipeHorizonSpace * this.colOfPipe
+            if (p.x < -p.w) {
+                var temp = p.x
+                temp += this.pipeHorizonSpace * this.colOfPipe
+                this.pipes.splice(0, 2)
+                var p3 = new gameImage(this.game, 'pipeUp')
+                p3.x = temp
+                var p4 = new gameImage(this.game, 'pipeDown')
+                p4.x = p3.x
+                this.resetPipesPosition(p3, p4)
+                this.pipes.push(p3)
+                this.pipes.push(p4)
             }
         }
+
+        // if(this.collide(this.bird)) {
+        //     return
+        // }
     }
     draw() {
         var context = this.game.context
         for (var p of this.pipes) {
-            context.save()
-            var w2 = p.w / 2
-            var h2 = p.h / 2
-            context.translate(p.x + w2, p.y + h2)
-            var scaleX = p.flipX ? -1 : 1
-            var scaleY = p.flipY ? -1 : 1
-            context.scale(scaleX, scaleY)
-            context.rotate(p.rotation * Math.PI / 180)
-            context.translate(-w2, -h2)
-            context.drawImage(p.textture, 0, 0)
-            context.restore()
+            context.drawImage(p.textture, p.x, p.y)
         }
     }
 }

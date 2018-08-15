@@ -16,7 +16,7 @@ var rectIntersects = function (a, b) {
     return false
 }
 
-const randomBetween = function(start, end) {
+var randomBetween = function(start, end) {
     var n = Math.random() * (end - start + 1)
     return Math.floor(n + start)
 }

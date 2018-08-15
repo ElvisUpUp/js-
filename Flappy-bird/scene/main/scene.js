@@ -2,6 +2,7 @@ class Scene extends gameScene {
     constructor(game) {
         super(game)
         this.game = game
+        this.game.over = false
 
         var bg = new gameImage(this.game, 'bg')
         this.addElement(bg)
@@ -20,10 +21,14 @@ class Scene extends gameScene {
             this.addElement(land)
             this.grounds.push(land)
         }
-        var b = new Bird(this.game)
 
+        var b = new Bird(this.game)
         this.b = b
         this.addElement(b)
+
+        var score = new Score(this.game)
+        score.updateScore()
+        this.addElement(score)
 
         this.setupInputs()
 
@@ -37,14 +42,16 @@ class Scene extends gameScene {
         if (this.game.paused) {
             return
         }
+        // @TODO 判断开始计数
+        this.b.startCount(this.pipe.pipes[0])
+
         // 死亡切换场景
-            // log(this.pipe.pipes[0].x, this.pipe.pipes[0].y + this.pipe.pipes[0].h, this.b.x + this.b.w==this.pipe.pipes[0].x, this.b.y < this.pipe.pipes[0].y + this.pipe.pipes[0].h)
-            // @TODO 与下面柱子相撞
-            if (this.b.over(this.pipe.pipes[0])) {
-                log('over')
-                var end = new sceneEnd(this.game, 'bg')
-                this.game.replaceScene(end)
-            }
+        // 1是上面，0是下面
+        if (this.b.over(this.pipe.pipes[1], this.pipe.pipes[0])) {
+            this.game.over = true
+            var end = new sceneEnd(this.game, 'bg')
+            this.game.replaceScene(end)
+        }
         super.update()
         this.skipCounts--
             var offset = -5
@@ -61,16 +68,15 @@ class Scene extends gameScene {
     draw() {
         super.draw()
     }
-
     setupInputs() {
-        this.game.registerAction('a', (keyStatus) => {
-            // this.b.move(-10, keyStatus)
+        this.game.canvas.onclick = (event) => {
             this.b.rotation = -45
             this.b.jump()
-        })
-        // this.game.registerAction('p', (keyStatus) => {
-        //     this.game.pause()
-        //     log('pause')
+        }
+        // var that = this
+        // this.game.canvas.addEventListener('click', function inputs(event){
+        //     that.b.rotation = -45
+        //     that.b.jump()
         // })
     }
 }

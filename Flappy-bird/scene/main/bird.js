@@ -1,8 +1,8 @@
 class Bird {
     constructor(game) {
         this.game = game
-        this.x = 80
-        this.y = 200
+        this.x = 40
+        this.y = 250
         this.animations = {
             fly: [],
             flyUp: [],
@@ -31,36 +31,50 @@ class Bird {
     jump() {
         this.vy = -10
     }
-    over(unity) {
-        var h = 400
-        if (this.y > h || (this.x + this.w > unity.x && this.y < unity.y + unity.h)) {
+    startCount(p) {
+        if (this.x + this.w > p.x) {
+            this.game.isCount = true
+        }
+    }
+    over(p1, p2) {
+        var h = 410
+        if (this.y > h || (this.x + this.w < p1.x + p1.w && this.x + this.w > p1.x + 5 && this.y < p1.y + p1.h)) {
+            // 碰撞上面
             this.y = h
+            this.game.over = true
             return true
-        }else {
+        } else if (this.y > h || (this.x + this.w < p1.x + p1.w && this.x + this.w > p1.x + 5 && this.y + this.w > p2.y)) {
+            // 碰撞下面
+            this.y = h
+            this.game.over = true
+            return true
+        } else {
             return false
         }
     }
     update() {
-        // 更新受力
-        this.y += this.vy
-        this.vy += this.gy * 0.2
-        
+        if (this.game.start) {
+            // 更新受力
+            this.y += this.vy
+            this.vy += this.gy * 0.2
+
+            // 更新角度
+            if (this.rotation < 45) {
+                this.rotation += 5
+            }
+        }
+
         var h = 420
-        if(this.y > h) {
+        if (this.y > h) {
             this.y = h
         }
 
-        // 更新角度
-        if (this.rotation < 45) {
-            this.rotation += 5
-        }
-
         this.frameCount--
-        if (this.frameCount == 0) {
-            this.frameCount = 3
-            this.frameIndex = (this.frameIndex + 1) % this.frames().length
-            this.textture = this.frames()[this.frameIndex]
-        }
+            if (this.frameCount == 0) {
+                this.frameCount = 3
+                this.frameIndex = (this.frameIndex + 1) % this.frames().length
+                this.textture = this.frames()[this.frameIndex]
+            }
 
     }
     draw() {

@@ -1,4 +1,3 @@
-// @TODO 开场界面
 class sceneBegin extends gameScene {
     constructor(game) {
         super(game)
@@ -17,13 +16,25 @@ class sceneBegin extends gameScene {
             this.addElement(land)
             this.grounds.push(land)
         }
-        var b = new Bird(this.game)
 
+        var ready = new gameImage(this.game, 'ready')
+        ready.x = 40
+        ready.y = 150
+        this.addElement(ready)
+
+        var b = new Bird(this.game)
         this.b = b
         this.addElement(b)
 
-        this.setupInputs()
+        var tap = new gameImage(this.game, 'tap')
+        tap.x = 100
+        tap.y = 230
+        this.addElement(tap)
 
+        var score = new Score(this.game)
+        this.addElement(score)
+
+        this.setupInputs()
     }
     update() {
         super.update()
@@ -41,14 +52,16 @@ class sceneBegin extends gameScene {
     }
     draw() {
         super.draw()
-
     }
 
     setupInputs() {
-        this.game.registerAction('k', () => {
-            var main = new Scene(this.game, 'bg')
-            this.game.replaceScene(main)
-        });
+        var that = this
+        this.game.canvas.addEventListener('click', function inputs(event){
+            var main = new Scene(that.game, 'bg')
+            that.game.replaceScene(main)
+            that.game.start = true
+            that.game.canvas.removeEventListener('click', inputs)
+        })
     }
 }
 

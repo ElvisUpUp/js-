@@ -13,7 +13,15 @@ var __main = function () {
         bird0: 'img/bird0_0.png',
         bird1: 'img/bird0_1.png',
         bird2: 'img/bird0_2.png',
-        pipe: 'img/pipe_up.png',
+        pipeUp: 'img/pipe_up.png',
+        pipeDown: 'img/pipe_down.png',
+        rank: 'img/button_score.png',
+        tap: 'img/tutorial.png',
+        ready: 'img/text_ready.png',
+        over: 'img/text_game_over.png',
+        panel: 'img/score_panel.png',
+        play: 'img/button_play.png',
+        // score: 'img/font_048.png',
     }
 
     var game = new paddleGame(images, function (game) {
