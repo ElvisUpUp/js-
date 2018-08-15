@@ -9,11 +9,15 @@ class paddleGame {
         this.actions = {}
         this.keydowns = {}
         this.paused = false
+        this.start = false
+        this.isOver = false
+        this.isCount = false
+        this.gScore = 0
         //events
         window.addEventListener('keydown', (event) => {
             this.keydowns[event.key] = 'down'
         });
-        window.addEventListener('keyup', () => {
+        window.addEventListener('keyup', (event) => {
             this.keydowns[event.key] = 'up'
         });
         // window.addEventListener('input', (event) => {
