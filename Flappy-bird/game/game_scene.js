@@ -3,6 +3,7 @@ class gameScene {
     constructor(game) {
         this.game = game
         this.elements = []
+        this.gScore = 0
     }
     addElement(img) {
         img.scene = this

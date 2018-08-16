@@ -49,7 +49,7 @@ class Scene extends gameScene {
         if (this.b.pass(this.pipe.pipes[1])) {
             if (this.b.isPass) {
                 this.s.score++
-                this.game.gScore = this.s.score
+                this.game = this.s.score
             }
         }
 

@@ -65,6 +65,11 @@ class Bird {
             return false
         }
     }
+    getScore() {
+        if (!this.game.isOver) {
+            return true
+        }
+    }
     update() {
         if (this.game.start) {
             // 更新受力
