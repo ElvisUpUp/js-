@@ -24,14 +24,14 @@ class paddleGame {
             window.fps = event.target.value;
         })
         this.init()
-        
+
     }
     // single instance
     static instance(...args) {
         this.i = this.i || new this(...args)
         return this.i
     }
-    
+
     drawImage(image) {
         this.context.drawImage(image.textture, image.x, image.y);
     }
@@ -60,7 +60,7 @@ class paddleGame {
             var status = g.keydowns[key]
             if (status == 'down') {
                 g.actions[key]('down');
-            }else if (status == 'up') {
+            } else if (status == 'up') {
                 g.actions[key]('up');
                 // 删除这个key的状态
                 g.keydowns[key] = null

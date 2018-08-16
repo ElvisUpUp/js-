@@ -91,21 +91,16 @@ class sceneEnd extends gameScene {
     }
 
     setupInputs() {
-        // this.game.canvas.onclick = (event) => {
-        //     var main = new Scene(this.game, 'bg')
-        //     this.game.replaceScene(main)
-        //     this.game.start = true
-        //     this.game.canvas.onclick = null
-        //     this.game.gScore = 0
-        // }
         var that = this
         this.game.canvas.addEventListener('click', function inputs(event) {
-            // @TODO 点击区域
             var x = event.pageX - that.game.canvas.getBoundingClientRect().left;
             var y = event.pageY - that.game.canvas.getBoundingClientRect().top;
-            log(x, y)
-            log(that.game.context.isPointInPath(20, 50))
-            if (that.game.context.isPointInPath(20, 50)) {
+            //判断点击重玩
+            that.game.context.beginPath()
+            that.game.context.moveTo(0, 0)
+            that.game.context.rect(20, 370, 116, 70)
+            that.game.context.closePath();
+            if (that.game.context.isPointInPath(x, y)) {
                 var main = new Scene(that.game, 'bg')
                 that.game.replaceScene(main)
                 that.game.start = true
