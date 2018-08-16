@@ -20,11 +20,16 @@ class paddleGame {
         window.addEventListener('keyup', (event) => {
             this.keydowns[event.key] = 'up'
         });
-        // window.addEventListener('input', (event) => {
-        //     window.fps = event.target.value;
-        // })
+        window.addEventListener('input', (event) => {
+            window.fps = event.target.value;
+        })
         this.init()
         
+    }
+    // single instance
+    static instance(...args) {
+        this.i = this.i || new this(...args)
+        return this.i
     }
     
     drawImage(image) {

@@ -13,17 +13,7 @@ class Score {
         this.game.context.fillText(this.score, this.x, this.y)
         this.game.context.strokeText(this.score, this.x, this.y)
     }
-    updateScore() {
-        var scoreTimer = setInterval(() => {
-            this.score++
-            if (this.game.over) {
-                clearInterval(scoreTimer)
-                this.game.gScore = this.score
-                log('update score', this.game.gScore)
-            }
-        }, 1000)
-    }
     update() {
-
+        
     }
 }

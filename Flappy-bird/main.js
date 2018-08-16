@@ -24,7 +24,7 @@ var __main = function () {
         // score: 'img/font_048.png',
     }
 
-    var game = new paddleGame(images, function (game) {
+    var game = paddleGame.instance(images, function (game) {
         var scene = new sceneBegin(game)
         // var scene = new Scene(game)
         game.runWithScene(scene)

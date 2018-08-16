@@ -5,8 +5,8 @@ class Bird {
         this.y = 250
         this.animations = {
             fly: [],
-            flyUp: [],
-            flyDown: [],
+            // flyUp: [],
+            // flyDown: [],
         }
         for (let i = 0; i < 3; i++) {
             var name = `bird${i}`
@@ -21,6 +21,7 @@ class Bird {
         this.frameCount = 3
         this.rotation = 0
         this.flipX = false
+        this.isPass = false
         // 重力和加速度
         this.gy = 10
         this.vy = 0
@@ -34,6 +35,18 @@ class Bird {
     startCount(p) {
         if (this.x + this.w > p.x) {
             this.game.isCount = true
+        }
+    }
+    pass(p) {
+        if (this.x + this.w > p.x + p.w && this.x < p.x + p.w) {
+            this.isPass = true
+            if (this.x > p.x + p.w - 45) {
+                this.isPass = false
+            }
+            return true
+        } else {
+            this.isPass = false
+            return false
         }
     }
     over(p1, p2) {

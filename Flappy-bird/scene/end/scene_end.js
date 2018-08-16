@@ -1,8 +1,8 @@
-// @TODO 结束界面
 class sceneEnd extends gameScene {
     constructor(game) {
         super(game)
         this.game = game
+        this.bestScore = 0
 
         var bg = new gameImage(this.game, 'bg')
         this.addElement(bg)
@@ -17,7 +17,7 @@ class sceneEnd extends gameScene {
             this.addElement(land)
             this.grounds.push(land)
         }
-        
+
         var over = new gameImage(this.game, 'over')
         over.x = 40
         over.y = 150
@@ -31,7 +31,6 @@ class sceneEnd extends gameScene {
         var score = new Score(this.game)
         score.x = 205
         score.y = 285
-        log('end score', this.game.gScore)
         score.score = this.game.gScore
         this.addElement(score)
 
@@ -45,20 +44,31 @@ class sceneEnd extends gameScene {
         rank.y = 370
         this.addElement(rank)
 
-        // this.scoreRequest()
+        this.scoreRequest()
         this.setupInputs()
     }
 
     scoreRequest() {
         var xhr = new XMLHttpRequest()
+        var arr
         xhr.onreadystatechange = (res) => {
             if (xhr.status == 200 && xhr.readyState == 4) {
                 res = JSON.parse(xhr.responseText)
-                res.data.result.push({"grade": this.game.gScore})
-                log(res.data.result)
+                arr = res.data.result
+                arr.sort((item1, item2) => {
+                    return Number(item2.grade) - Number(item1.grade)
+                })
+                this.bestScore = arr[0].grade
+                var bs = new Score(this.game)
+                bs.x = 200
+                bs.y = 330
+                bs.score = this.bestScore
+                this.addElement(bs)
             }
         }
-        xhr.open('get', 'https://easy-mock.com/mock/5b712abe3ec6e13ce517da93/Ranking/rankingList?name=王强&grade=123#!method=GET&queryParameters=%5B%7B%22enabled%22%3Atrue%2C%22key%22%3A%22name%22%2C%22value%22%3A%22%E7%8E%8B%E5%BC%BA%22%7D%2C%7B%22enabled%22%3Atrue%2C%22key%22%3A%22grade%22%2C%22value%22%3A%22123%22%7D%5D&body=&headers=%5B%5D')
+        // name=王强&grade=123#
+        var s = this.game.gScore
+        xhr.open('get', `https://easy-mock.com/mock/5b712abe3ec6e13ce517da93/Ranking/rankingList?name=elvis&grade=${s}`)
         xhr.send(null)
     }
 
@@ -70,7 +80,7 @@ class sceneEnd extends gameScene {
         super.update()
         // 地面移动
         this.skipCounts--
-        var offset = -5
+            var offset = -5
         if (this.skipCounts == 0) {
             this.skipCounts = 4
             offset = 15
@@ -90,11 +100,18 @@ class sceneEnd extends gameScene {
         //     this.game.gScore = 0
         // }
         var that = this
-        this.game.canvas.addEventListener('click', function inputs(event){
-            var main = new Scene(that.game, 'bg')
-            that.game.replaceScene(main)
-            that.game.start = true
-            that.game.canvas.removeEventListener('click', inputs)
+        this.game.canvas.addEventListener('click', function inputs(event) {
+            // @TODO 点击区域
+            var x = event.pageX - that.game.canvas.getBoundingClientRect().left;
+            var y = event.pageY - that.game.canvas.getBoundingClientRect().top;
+            log(x, y)
+            log(that.game.context.isPointInPath(20, 50))
+            if (that.game.context.isPointInPath(20, 50)) {
+                var main = new Scene(that.game, 'bg')
+                that.game.replaceScene(main)
+                that.game.start = true
+                that.game.canvas.removeEventListener('click', inputs)
+            }
         })
     }
 }

@@ -27,7 +27,7 @@ class Scene extends gameScene {
         this.addElement(b)
 
         var score = new Score(this.game)
-        score.updateScore()
+        this.s = score
         this.addElement(score)
 
         this.setupInputs()
@@ -45,6 +45,14 @@ class Scene extends gameScene {
         // @TODO 判断开始计数
         this.b.startCount(this.pipe.pipes[0])
 
+        // @TODO 更新分数
+        if (this.b.pass(this.pipe.pipes[1])) {
+            if (this.b.isPass) {
+                this.s.score++
+                this.game.gScore = this.s.score
+            }
+        }
+
         // 死亡切换场景
         // 1是上面，0是下面
         if (this.b.over(this.pipe.pipes[1], this.pipe.pipes[0])) {
@@ -52,6 +60,7 @@ class Scene extends gameScene {
             var end = new sceneEnd(this.game, 'bg')
             this.game.replaceScene(end)
         }
+
         super.update()
         this.skipCounts--
             var offset = -5
