@@ -11,7 +11,6 @@ class paddleGame {
         this.paused = false
         this.start = false
         this.over = false
-        this.isCount = false
         this.gScore = 0
         //events
         window.addEventListener('keydown', (event) => {
@@ -24,7 +23,6 @@ class paddleGame {
             window.fps = event.target.value;
         })
         this.init()
-
     }
     // single instance
     static instance(...args) {
@@ -38,15 +36,12 @@ class paddleGame {
     pause() {
         this.paused = !this.paused;
     }
-    //update
     update() {
         this.scene.update()
     }
-    //draw
     draw() {
         this.scene.draw()
     }
-    //register
     registerAction(key, callback) {
         this.actions[key] = callback;
     }
@@ -66,17 +61,13 @@ class paddleGame {
                 g.keydowns[key] = null
             }
         }
-        //update
         g.update();
-        //clear
         g.context.clearRect(0, 0, g.canvas.width, g.canvas.height);
-        //draw
         g.draw();
         setTimeout(function () {
             g.runloop();
         }, 1000 / fps);
     }
-
     texttureByName(name) {
         var img = this.images[name];
         return img
@@ -105,10 +96,10 @@ class paddleGame {
             var path = this.images[name];
             let img = new Image();
             img.src = path;
-            img.onload = function () {
+            img.onload = () => {
                 // 存入g.images中
                 g.images[name] = img;
-                //所有图片加载完成后，调用run()
+                // 所有图片加载完成后，调用run()
                 loads.push(1)
                 if (loads.length === names.length) {
                     g.__run();

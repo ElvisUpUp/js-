@@ -26,7 +26,6 @@ var __main = function () {
 
     var game = paddleGame.instance(images, function (game) {
         var scene = new sceneBegin(game)
-        // var scene = new Scene(game)
         game.runWithScene(scene)
     });
 }

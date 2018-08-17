@@ -5,8 +5,6 @@ class Bird {
         this.y = 250
         this.animations = {
             fly: [],
-            // flyUp: [],
-            // flyDown: [],
         }
         for (let i = 0; i < 3; i++) {
             var name = `bird${i}`
@@ -31,11 +29,6 @@ class Bird {
     }
     jump() {
         this.vy = -10
-    }
-    startCount(p) {
-        if (this.x + this.w > p.x) {
-            this.game.isCount = true
-        }
     }
     pass(p) {
         if (this.x + this.w > p.x + p.w && this.x < p.x + p.w) {
@@ -111,12 +104,6 @@ class Bird {
     }
     move(y, keyStatus) {
         this.vy += y
-        // var animationNames = {
-        //     down: 'flyUp',
-        //     up: 'flyDown',
-        // }
-        // var name = animationNames[keyStatus]
-        // this.changeAnimation(name)
     }
     changeAnimation(name) {
         this.animationName = name

@@ -1,4 +1,3 @@
-//es6 class
 class gameScene {
     constructor(game) {
         this.game = game
@@ -11,7 +10,6 @@ class gameScene {
     }
     draw() {
         for (var e of this.elements) {
-            // this.game.drawImage(e)
             e.draw()
         }
     }

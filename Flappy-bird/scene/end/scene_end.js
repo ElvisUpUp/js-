@@ -17,6 +17,7 @@ class sceneEnd extends gameScene {
             this.addElement(land)
             this.grounds.push(land)
         }
+
         var over = new gameImage(this.game, 'over')
         over.x = 40
         over.y = 150
@@ -65,7 +66,6 @@ class sceneEnd extends gameScene {
                 this.addElement(bs)
             }
         }
-        // name=王强&grade=123#
         var s = this.game.gScore
         xhr.open('get', `https://easy-mock.com/mock/5b712abe3ec6e13ce517da93/Ranking/rankingList?name=elvis&grade=${s}`)
         xhr.send(null)

@@ -42,20 +42,18 @@ class Scene extends gameScene {
         if (this.game.paused) {
             return
         }
-        // @TODO 判断开始计数
-        this.b.startCount(this.pipe.pipes[0])
 
-        // @TODO 更新分数
         if (this.b.pass(this.pipe.pipes[1])) {
             if (this.b.isPass) {
                 this.s.score++
-                this.game = this.s.score
+                this.game.gScore = this.s.score
             }
         }
 
         // 死亡切换场景
         // 1是上面，0是下面
         if (this.b.over(this.pipe.pipes[1], this.pipe.pipes[0])) {
+            log(this.game)
             this.game.over = true
             var end = new sceneEnd(this.game, 'bg')
             this.game.replaceScene(end)
@@ -63,7 +61,7 @@ class Scene extends gameScene {
 
         super.update()
         this.skipCounts--
-            var offset = -5
+        var offset = -5
         if (this.skipCounts == 0) {
             this.skipCounts = 4
             offset = 15
@@ -82,10 +80,5 @@ class Scene extends gameScene {
             this.b.rotation = -45
             this.b.jump()
         }
-        // var that = this
-        // this.game.canvas.addEventListener('click', function inputs(event){
-        //     that.b.rotation = -45
-        //     that.b.jump()
-        // })
     }
 }

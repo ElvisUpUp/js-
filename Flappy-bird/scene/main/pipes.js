@@ -39,10 +39,6 @@ class Pipes {
                 this.pipes.push(p4)
             }
         }
-
-        // if(this.collide(this.bird)) {
-        //     return
-        // }
     }
     draw() {
         var context = this.game.context
