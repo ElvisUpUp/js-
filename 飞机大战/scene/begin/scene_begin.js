@@ -3,14 +3,14 @@ class sceneBegin extends gameScene {
         super(game)
         this.game = game
 
-        var bg = new gameImage(this.game, 'bg')
-        this.addElement(bg)
+        // var bg = new gameImage(this.game, 'bg')
+        // this.addElement(bg)
         
-        var w = new gameAnimation(this.game)
-        w.x = 100
-        w.y = 200
-        this.w = w
-        this.addElement(w)
+        // var w = new gameAnimation(this.game)
+        // w.x = 100
+        // w.y = 200
+        // this.w = w
+        // this.addElement(w)
 
         this.setupInputs()
     }

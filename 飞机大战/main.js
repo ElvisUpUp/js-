@@ -36,8 +36,8 @@ var __main = function () {
     }
 
     var game = new paddleGame(images, function (game) {
-        var scene = new sceneBegin(game)
-        // var scene = new Scene(game)
+        // var scene = new sceneBegin(game)
+        var scene = new Scene(game)
         game.runWithScene(scene)
     });
 }

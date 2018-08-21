@@ -3,5 +3,4 @@ var config = {
         _comment: '管子垂直方向间距',
         value: 150
     },
-    
 }
