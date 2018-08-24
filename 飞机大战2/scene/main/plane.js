@@ -21,6 +21,9 @@ class Plane {
     frames() {
         return this.animations[this.animationName]
     }
+    changeAnimation(name) {
+        this.animationName = name
+    }
     over() {
 
     }
@@ -75,8 +78,5 @@ class Plane {
     draw() {
         var context = this.game.context
         context.drawImage(this.textture, this.x, this.y)
-    }
-    changeAnimation(name) {
-        this.animationName = name
     }
 }

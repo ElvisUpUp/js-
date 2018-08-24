@@ -61,9 +61,9 @@ class paddleGame {
                 g.keydowns[key] = null
             }
         }
-        g.update();
         g.context.clearRect(0, 0, g.canvas.width, g.canvas.height);
         g.draw();
+        g.update();
         setTimeout(function () {
             g.runloop();
         }, 1000 / fps);

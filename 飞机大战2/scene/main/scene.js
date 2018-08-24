@@ -42,7 +42,6 @@ class Scene extends gameScene {
         // 死亡切换场景
         for (var e of this.es) {
             if (e.collide()) {
-                log('end')
                 var end = new sceneEnd(this.game)
                 this.game.replaceScene(end)
                 return

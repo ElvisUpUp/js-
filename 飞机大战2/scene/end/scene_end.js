@@ -43,7 +43,6 @@ class sceneEnd extends gameScene {
         this.game.context.fillStyle = 'black';
         this.game.context.fillText('游戏结束', 100, 200)
         this.game.context.fillText('分数：', 100, 260)
-        log('end draw', )
     }
 
     update() {
@@ -51,8 +50,10 @@ class sceneEnd extends gameScene {
     }
 
     setupInputs() {
-        // this.game.canvas.addEventListener('click', function inputs(event) {
-            
-        // })
+        var that = this
+        this.game.canvas.addEventListener('click', function inputs(event) {
+            var scene = new Scene(that.game)
+            that.game.replaceScene(scene)
+        })
     }
 }
